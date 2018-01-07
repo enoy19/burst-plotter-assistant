@@ -30,7 +30,7 @@ Values:
   * cycleIndex
   
 #### Example: 
-C:\Burst\plotter.exe "D:\Plots\\\\${process.numericalAccountId}_${cycle.currentStartingNonce}_${process.nonces}_${process.staggerSize}"
+C:\Burst\plotter.exe "D:\Plots\\\\${process.numericalAccountId}\_${cycle.currentStartingNonce}\_${process.nonces}\_${process.staggerSize}"
 
 Note: Due to the way Apache Velocity works, you must escape backslashes behind $-symbols: \\\\${whatever}
 
