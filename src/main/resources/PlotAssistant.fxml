@@ -37,25 +37,34 @@
          <children>
             <HBox fx:id="hBoxTop" alignment="CENTER" spacing="5.0" VBox.vgrow="NEVER">
                <children>
-                  <VBox>
+                  <VBox spacing="5.0">
                      <children>
                         <Label text="Numerical Account ID:" />
                         <TextField fx:id="numericalAccountId" promptText="Numerical Account ID" />
                      </children>
                   </VBox>
-                  <VBox>
+                  <VBox spacing="5.0">
                      <children>
-                        <Label text="Starting Nonce:" />
+                        <HBox alignment="CENTER_LEFT" spacing="5.0">
+                           <children>
+                              <Label text="Starting Nonce:" />
+                              <Button mnemonicParsing="false" onAction="#findStartingNonce" text="Find">
+                                 <font>
+                                    <Font size="9.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
                         <TextField fx:id="startingNonce" promptText="Starting Nonce" />
                      </children>
                   </VBox>
-                  <VBox>
+                  <VBox spacing="5.0">
                      <children>
                         <Label text="Nonces:" />
                         <TextField fx:id="nonces" promptText="Nonces" />
                      </children>
                   </VBox>
-                  <VBox>
+                  <VBox spacing="5.0">
                      <children>
                         <Label text="Stagger Size:" />
                         <TextField fx:id="staggerSize" promptText="Stagger Size" />

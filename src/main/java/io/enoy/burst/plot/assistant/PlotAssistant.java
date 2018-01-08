@@ -5,6 +5,8 @@ import io.enoy.burst.plot.assistant.model.PlotAssistantModel;
 import io.enoy.burst.plot.assistant.model.PlotAssistantModelFactory;
 import io.enoy.burst.plot.assistant.util.PlotAssistantGridUtil;
 import io.enoy.burst.plot.assistant.util.PlotAssistantPersistenceUtil;
+import io.enoy.burst.plot.assistant.util.PlotAssistantPlotFileUtil;
+import io.enoy.burst.plot.assistant.util.PlotAssistantPlotFileUtil.PlotFile;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,6 +15,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 
@@ -20,6 +23,7 @@ import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.net.URL;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -62,6 +66,7 @@ public class PlotAssistant implements Initializable {
 	private ToggleButton startStopButton;
 
 	private FileChooser fileChooser;
+	private DirectoryChooser plotFileDirectoryChooser;
 	private Thread workerThread;
 
 	public void initialize(URL location, ResourceBundle resources) {
@@ -69,6 +74,8 @@ public class PlotAssistant implements Initializable {
 
 		fileChooser = new FileChooser();
 		fileChooser.getExtensionFilters().add(new ExtensionFilter("Plot Assistant Files", "*.paf"));
+
+		plotFileDirectoryChooser = new DirectoryChooser();
 	}
 
 	@FXML
@@ -136,6 +143,20 @@ public class PlotAssistant implements Initializable {
 		} else {
 			stop();
 		}
+	}
+
+	@FXML
+	void findStartingNonce() {
+
+		File directory = plotFileDirectoryChooser.showDialog(null);
+
+		if (Objects.nonNull(directory)) {
+			BigInteger nextStartingNonce = PlotAssistantPlotFileUtil.findNextStartingNonce(directory);
+
+			if (Objects.nonNull(nextStartingNonce))
+				startingNonce.setText(nextStartingNonce.toString());
+		}
+
 	}
 
 	private boolean isNoncesValid() {
